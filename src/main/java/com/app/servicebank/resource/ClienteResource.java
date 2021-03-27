@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,14 @@ public class ClienteResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).body(cliente);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable Integer id){
+
+        Cliente cliente = service.find(id);
+
+        return ResponseEntity.ok().body(cliente);
     }
 
 

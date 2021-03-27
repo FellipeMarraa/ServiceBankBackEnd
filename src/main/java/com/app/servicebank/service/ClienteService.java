@@ -19,15 +19,19 @@ public class ClienteService {
 
     @Transactional
     public Cliente insert(Cliente cliente) {
-        cliente = repository.save(cliente);
-        return cliente;
+        cliente.setId(null);
+        return repository.save(cliente);
     }
 
     public Cliente find(Integer id){
+        Optional<Cliente> cliente = repository.findById(id);
+        return cliente.orElse(null);
 
-        Optional<Cliente> clienteOptional = repository.findById(id);
-        return  clienteOptional.orElse(null);
     }
 
 
+    public Cliente update(Cliente cliente) {
+        find(cliente.getId());
+        return repository.save(cliente);
+    }
 }

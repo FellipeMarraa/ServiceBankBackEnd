@@ -18,23 +18,32 @@ public class ClienteResource {
     @Autowired
     private ClienteService service;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {
-        cliente = service.insert(cliente);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(cliente.getId()).toUri();
-        return ResponseEntity.created(uri).body(cliente);
-    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id){
-
+    public ResponseEntity<Cliente> findAll(@PathVariable Integer id) {
         Cliente cliente = service.find(id);
-
         return ResponseEntity.ok().body(cliente);
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Cliente> find(@RequestBody Integer id) {
+        Cliente cliente = service.find(id);
+        return ResponseEntity.ok().body(cliente);
+    }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@RequestBody Cliente cliente) {
+        cliente = service.insert(cliente);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
+        cliente.setId(id);
+        cliente = service.update(cliente);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

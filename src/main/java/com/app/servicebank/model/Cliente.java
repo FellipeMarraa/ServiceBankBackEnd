@@ -1,7 +1,10 @@
 package com.app.servicebank.model;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Cliente")
@@ -18,6 +21,9 @@ public class Cliente implements Serializable {
     private String email;
 
     private String senha;
+
+    @Transient
+    private List<Banco> bancos = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -57,5 +63,13 @@ public class Cliente implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<Banco> getBancos() {
+        return bancos;
+    }
+
+    public void setBancos(List<Banco> bancos) {
+        this.bancos = bancos;
     }
 }

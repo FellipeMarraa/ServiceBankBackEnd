@@ -29,6 +29,11 @@ public class ClienteService {
         return cliente.orElse(null);
 
     }
+    @Transactional
+    public List<Cliente> findAll(){
+        return repository.findAll();
+    }
+
 
     @Transactional
     public Cliente update(Cliente cliente) {

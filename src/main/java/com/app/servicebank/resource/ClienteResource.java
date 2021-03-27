@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/clientes")
+@RequestMapping(value = "/cliente")
 public class ClienteResource {
 
     @Autowired
@@ -26,27 +26,27 @@ public class ClienteResource {
         return ResponseEntity.ok().body(cliente);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Cliente> find(@RequestBody Integer id) {
-        Cliente cliente = service.find(id);
-        return ResponseEntity.ok().body(cliente);
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<Cliente> findAll(@RequestBody List<Cliente> cliente) {
+       cliente = service.findAll();
+        return findAll(cliente);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@RequestBody Cliente cliente) {
         cliente = service.insert(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
         cliente.setId(id);
         cliente = service.update(cliente);
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();

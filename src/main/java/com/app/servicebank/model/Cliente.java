@@ -22,9 +22,6 @@ public class Cliente implements Serializable {
 
     private String senha;
 
-    @Transient
-    private List<Banco> bancos = new ArrayList<>();
-
     public Integer getId() {
         return id;
     }
@@ -65,11 +62,4 @@ public class Cliente implements Serializable {
         this.senha = senha;
     }
 
-    public List<Banco> getBancos() {
-        return bancos;
-    }
-
-    public void setBancos(List<Banco> bancos) {
-        this.bancos = bancos;
-    }
 }

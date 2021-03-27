@@ -23,15 +23,22 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
+    @Transactional
     public Cliente find(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
         return cliente.orElse(null);
 
     }
 
-
+    @Transactional
     public Cliente update(Cliente cliente) {
         find(cliente.getId());
         return repository.save(cliente);
+    }
+
+
+    public void delete(Integer id) {
+        repository.delete(find(id));
+
     }
 }

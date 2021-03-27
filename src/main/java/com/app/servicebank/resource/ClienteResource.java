@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,12 @@ public class ClienteResource {
     public ResponseEntity<Void> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
         cliente.setId(id);
         cliente = service.update(cliente);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 

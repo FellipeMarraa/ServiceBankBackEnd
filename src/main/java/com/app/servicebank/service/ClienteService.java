@@ -27,7 +27,7 @@ public class ClienteService {
 
         Optional<Cliente> clienteOptional = repository.findById(id);
         return  clienteOptional.orElse(null);
-
     }
+
 
 }

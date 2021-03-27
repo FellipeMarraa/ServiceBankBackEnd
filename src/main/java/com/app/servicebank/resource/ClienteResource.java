@@ -17,11 +17,12 @@ public class ClienteResource {
     @Autowired
     private ClienteService service;
 
-@RequestMapping(method = RequestMethod.GET)
-    public String listar(){
-
-        return "REST FUNCIONANDO";
-
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {
+        cliente = service.insert(cliente);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).body(cliente);
     }
 
 

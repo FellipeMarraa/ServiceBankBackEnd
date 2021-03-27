@@ -16,4 +16,11 @@ public class ClienteService {
     private ClienteRepository repository;
 
 
+    @Transactional
+    public Cliente insert(Cliente cliente) {
+
+        cliente = repository.save(cliente);
+
+        return cliente;
+    }
 }

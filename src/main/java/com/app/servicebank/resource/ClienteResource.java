@@ -21,19 +21,19 @@ public class ClienteResource {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Cliente> findAll(@PathVariable Integer id) {
+    public ResponseEntity<Cliente> getById(@PathVariable Integer id) {
         Cliente cliente = service.find(id);
         return ResponseEntity.ok().body(cliente);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<Cliente> findAll(@RequestBody List<Cliente> cliente) {
-       cliente = service.findAll();
-        return findAll(cliente);
-    }
+//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    public ResponseEntity<Cliente> findAll(@RequestBody List<Cliente> cliente) {
+//       cliente = service.findAll();
+//        return findAll(cliente);
+//    }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {
         cliente = service.insert(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -50,6 +50,13 @@ public class ClienteResource {
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public Cliente logar(@RequestBody Cliente cliente) {
+//        cliente = service.logar(cliente);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+        return service.logar(cliente);
     }
 
 

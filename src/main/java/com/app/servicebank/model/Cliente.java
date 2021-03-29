@@ -16,7 +16,7 @@ public class Cliente implements Serializable {
 
     private String cpf;
 
-    private String nome;
+//    private String nome;
 
     private String email;
 
@@ -38,13 +38,13 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+//    public String getNome() {
+//        return nome;
+//    }
+//
+//    public void setNome(String nome) {
+//        this.nome = nome;
+//    }
 
     public String getEmail() {
         return email;

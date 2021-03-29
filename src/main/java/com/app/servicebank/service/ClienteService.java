@@ -18,21 +18,21 @@ public class ClienteService {
 
 
     @Transactional
-    public Cliente insert(Cliente cliente) {
-        cliente.setId(null);
-        return repository.save(cliente);
-    }
-
-    @Transactional
-    public Cliente find(Integer id){
+    public Cliente find(Integer id) {
         Optional<Cliente> cliente = repository.findById(id);
         return cliente.orElse(null);
 
     }
+
     @Transactional
-    public List<Cliente> findAll(){
-        return repository.findAll();
+    public Cliente insert(Cliente cliente) {
+        cliente.setId(null);
+        return repository.save(cliente);
     }
+//    @Transactional
+//    public List<Cliente> findAll(){
+//        return repository.findAll();
+//    }
 
 
     @Transactional
@@ -45,5 +45,18 @@ public class ClienteService {
     public void delete(Integer id) {
         repository.delete(find(id));
 
+    }
+
+    public Cliente logar(Cliente cliente) {
+
+        List<Cliente> listaDb = repository.findAll();
+
+        List<Cliente> usuarios = listaDb.stream().filter(item -> item.getEmail().equals(cliente.getEmail()) && item.getSenha().equals(cliente.getSenha())).collect(Collectors.toList());
+
+        if (usuarios != null) {
+            return usuarios.get(0);
+        }
+
+        return cliente;
     }
 }

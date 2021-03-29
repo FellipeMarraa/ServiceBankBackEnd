@@ -29,10 +29,11 @@ public class ClienteService {
         cliente.setId(null);
         return repository.save(cliente);
     }
-//    @Transactional
-//    public List<Cliente> findAll(){
-//        return repository.findAll();
-//    }
+
+    @Transactional
+    public List<Cliente> findAll(){
+        return repository.findAll();
+    }
 
 
     @Transactional
@@ -50,13 +51,13 @@ public class ClienteService {
     public Cliente logar(Cliente cliente) {
 
         List<Cliente> listaDb = repository.findAll();
-
-        List<Cliente> usuarios = listaDb.stream().filter(item -> item.getEmail().equals(cliente.getEmail()) && item.getSenha().equals(cliente.getSenha())).collect(Collectors.toList());
-
-        if (usuarios != null) {
-            return usuarios.get(0);
+        for (Cliente cliente1 : listaDb) {
+            if (cliente1.getEmail().equals(cliente.getEmail())){
+                if (cliente1.getSenha().equals(cliente.getSenha())){
+                    return cliente1;
+                }
+            }
         }
-
-        return cliente;
+        return null;
     }
 }

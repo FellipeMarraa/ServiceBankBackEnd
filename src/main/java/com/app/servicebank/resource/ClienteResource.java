@@ -26,11 +26,10 @@ public class ClienteResource {
         return ResponseEntity.ok().body(cliente);
     }
 
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
-//    public ResponseEntity<Cliente> findAll(@RequestBody List<Cliente> cliente) {
-//       cliente = service.findAll();
-//        return findAll(cliente);
-//    }
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<Cliente> list() {
+        return service.findAll();
+    }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {

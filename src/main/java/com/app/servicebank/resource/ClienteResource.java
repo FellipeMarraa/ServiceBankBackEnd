@@ -53,8 +53,6 @@ public class ClienteResource {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Cliente logar(@RequestBody Cliente cliente) {
-//        cliente = service.logar(cliente);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
         return service.logar(cliente);
     }
 

@@ -23,9 +23,8 @@ public class ClienteResource {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Cliente> getById(@PathVariable Integer id) {
-        Cliente cliente = service.find(id);
-        return ResponseEntity.ok().body(cliente);
+    public Cliente getById(@PathVariable Integer id) {
+        return service.find(id);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -41,16 +40,14 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) {
+    public Cliente update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) {
         cliente.setId(id);
-        cliente = service.update(cliente);
-        return ResponseEntity.noContent().build();
+        return service.update(cliente);
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+    public Void delete(@PathVariable Integer id){
+        return service.delete(id);
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)

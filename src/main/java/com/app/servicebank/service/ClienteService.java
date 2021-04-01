@@ -4,7 +4,6 @@ import com.app.servicebank.model.Cliente;
 import com.app.servicebank.repository.ClienteRepository;
 import com.app.servicebank.service.exception.DataIntegrityException;
 import com.app.servicebank.service.exception.ObjectNotFoundException;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -14,10 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintValidatorContext;
-import java.lang.annotation.Retention;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -49,12 +46,14 @@ public class ClienteService {
     }
 
 
-    public void delete(Integer id) {
+    public Void delete(Integer id) {
         try {
             repository.delete(find(id));
         }catch (DataIntegrityViolationException e){
             throw new DataIntegrityException("Não foi possível excluir o usuário");
         }
+
+        return null;
     }
 
     public Cliente logar(Cliente cliente) {

@@ -15,14 +15,11 @@ public class ClienteDTO implements Serializable {
 
     private String nome;
 
-    @NotEmpty(message = "Preenchimento obrigatório")
-    @Email(message = "Email Inválido")
-    private String email;
+    private String cpf;
 
     @NotEmpty(message = "Preenchimento obrigatório")
     private String senha;
 
-    private Integer tipo;
 
     public ClienteDTO() {
     }
@@ -30,7 +27,7 @@ public class ClienteDTO implements Serializable {
     public ClienteDTO(Cliente clienteDto) {
         id = clienteDto.getId();
         nome = clienteDto.getNome();
-        email = clienteDto.getEmail();
+        cpf = clienteDto.getEmail();
         senha = clienteDto.getSenha();
 
     }
@@ -52,11 +49,11 @@ public class ClienteDTO implements Serializable {
     }
 
     public String getEmail() {
-        return email;
+        return cpf;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.cpf = cpf;
     }
 
     public String getSenha() {
@@ -67,11 +64,4 @@ public class ClienteDTO implements Serializable {
         this.senha = senha;
     }
 
-    public TipoCliente getTipo() {
-        return TipoCliente.toEnum(tipo);
-    }
-
-    public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo.getCod();
-    }
 }

@@ -1,5 +1,6 @@
 package com.app.servicebank.model;
 
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -30,6 +31,7 @@ public class Cliente implements Serializable {
 
     private String email;
 
+    @JsonIgnore
     private String senha;
 
 
@@ -40,8 +42,8 @@ public class Cliente implements Serializable {
                    @CPF String cpf,
                    @CNPJ String cnpj,
                    String nome,
-                   @Email(message = "Email inválido") String email,
-                   @NotEmpty(message = "Preenchimento obrigatório") String senha
+                   String email,
+                   String senha
     ) {
         this.id = id;
         this.cpf = cpf;

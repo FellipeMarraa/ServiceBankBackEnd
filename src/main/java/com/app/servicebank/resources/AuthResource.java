@@ -3,6 +3,7 @@ package com.app.servicebank.resources;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.app.servicebank.dto.CpfDTO;
 import com.app.servicebank.dto.EmailDTO;
 import com.app.servicebank.security.JWTUtil;
 import com.app.servicebank.security.UserSS;
@@ -35,8 +36,8 @@ public class AuthResource {
     }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
-    public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO emailDTO) {
-        service.sendNewPassword(emailDTO.getEmail());
+    public ResponseEntity<Void> forgot(@Valid @RequestBody CpfDTO cpfDTO) {
+        service.sendNewPassword(cpfDTO.getCpf());
         return ResponseEntity.noContent().build();
     }
 }

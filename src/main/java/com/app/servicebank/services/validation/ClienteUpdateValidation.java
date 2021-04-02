@@ -30,14 +30,15 @@ public class ClienteUpdateValidation implements ConstraintValidator<ClienteUpdat
     @Override
     public boolean isValid(ClienteDTO clienteDTO, ConstraintValidatorContext context) {
 
+        @SuppressWarnings("unchecked")
         Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         Integer uriId = Integer.parseInt(map.get("id"));
 
         List<FieldMessage> list = new ArrayList<>();
 
-//
+
         Cliente verificaEmail = repository.findByEmail(clienteDTO.getEmail());
-        if (verificaEmail != null && !verificaEmail.equals(uriId)) {
+        if (verificaEmail != null && !verificaEmail.getId().equals(uriId)) {
             list.add(new FieldMessage("email", "Email já cadastrado!"));
         }
 

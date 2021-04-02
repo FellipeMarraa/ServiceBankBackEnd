@@ -2,7 +2,10 @@ package com.app.servicebank.dto;
 
 import com.app.servicebank.model.Cliente;
 import com.app.servicebank.services.validation.ClienteUpdate;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
@@ -11,13 +14,13 @@ public class ClienteDTO implements Serializable {
 
     private Integer id;
 
+    @Length(min = 5, max = 120, message = "O nome deve conter entre 5 e 120 caracteres")
     private String nome;
-
-    private String cpf;
 
     @NotEmpty(message = "Preenchimento obrigatório")
     private String senha;
 
+    @Email(message = "Email inválido")
     private String email;
 
 
@@ -27,7 +30,6 @@ public class ClienteDTO implements Serializable {
     public ClienteDTO(Cliente clienteDto) {
         id = clienteDto.getId();
         nome = clienteDto.getNome();
-        cpf = clienteDto.getEmail();
         senha = clienteDto.getSenha();
         email = clienteDto.getEmail();
 
@@ -49,14 +51,6 @@ public class ClienteDTO implements Serializable {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return cpf;
-    }
-
-    public void setEmail(String email) {
-        this.cpf = cpf;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -65,11 +59,11 @@ public class ClienteDTO implements Serializable {
         this.senha = senha;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -41,7 +41,7 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
         Cliente cliente = service.fromDTO(clienteDTO);
         cliente.setId(id);
         cliente = service.update(cliente);
@@ -52,11 +52,6 @@ public class ClienteResource {
     public Void delete(@PathVariable Integer id){
         return service.delete(id);
     }
-
-//    @RequestMapping(value = "/login",method = RequestMethod.POST)
-//    public Cliente logar(@RequestBody CredenciaisDTO credenciaisDTO) {
-//        return service.logar(credenciaisDTO);
-//    }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public Page<Cliente> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,

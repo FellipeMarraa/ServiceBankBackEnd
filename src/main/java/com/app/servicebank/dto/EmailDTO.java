@@ -3,11 +3,9 @@ package com.app.servicebank.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 public class EmailDTO implements Serializable {
 
-    @NotEmpty(message="Preenchimento obrigatório")
     @Email(message="Email inválido")
     private String email;
 

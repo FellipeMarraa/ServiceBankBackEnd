@@ -1,12 +1,6 @@
 package com.app.servicebank.model;
 
-import net.minidev.json.annotate.JsonIgnore;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,18 +14,15 @@ public class Cliente implements Serializable {
     private Integer id;
 
     @Column(unique = true)
-    @CPF
     private String cpf;
 
     @Column(unique = true)
-    @CNPJ
     private String cnpj;
 
     private String nome;
 
     private String email;
 
-    @JsonIgnore
     private String senha;
 
 
@@ -39,8 +30,8 @@ public class Cliente implements Serializable {
     }
 
     public Cliente(Integer id,
-                   @CPF String cpf,
-                   @CNPJ String cnpj,
+                   String cpf,
+                   String cnpj,
                    String nome,
                    String email,
                    String senha

@@ -2,6 +2,7 @@ package com.app.servicebank.services;
 
 import java.util.Random;
 
+import com.app.servicebank.dto.EmailDTO;
 import com.app.servicebank.model.Cliente;
 import com.app.servicebank.repository.ClienteRepository;
 import com.app.servicebank.services.exception.ObjectNotFoundException;
@@ -23,11 +24,11 @@ public class AuthService {
 
     private Random rand = new Random();
 
-    public void sendNewPassword(String email) {
+    public void sendNewPassword(String cpf) {
 
-        Cliente cliente = clienteRepository.findByEmail(email);
+        Cliente cliente = clienteRepository.findByCpf(cpf);
         if (cliente == null) {
-            throw new ObjectNotFoundException("Email não encontrado");
+            throw new ObjectNotFoundException("cpf não encontrado");
         }
 
         String newPass = newPassword();
@@ -35,8 +36,12 @@ public class AuthService {
 
         clienteRepository.save(cliente);
 
-        emailService.sendNewPasswordEmail(cliente, newPass);
+        Cliente clienteEmail = clienteRepository.findByEmail(cliente.getEmail());
+
+        emailService.sendNewPasswordEmail(clienteEmail, newPass);
     }
+
+
 
     private String newPassword() {
         char[] vet = new char[10];

@@ -55,7 +55,7 @@ public class ClienteService {
     public Cliente update(Cliente cliente) {
         Cliente newCliente = find(cliente.getId());
         updateData(newCliente, cliente);
-        return repository.save(newCliente);
+        return repository.save(cliente);
     }
 
 
@@ -68,19 +68,6 @@ public class ClienteService {
 
         return null;
     }
-
-//    public Cliente logar(CredenciaisDTO credenciaisDTO) {
-//
-//        List<Cliente> listaDb = repository.findAll();
-//        for (Cliente cliente1 : listaDb) {
-//            if (cliente1.getCpf().equals(credenciaisDTO.getCpf())){
-//                if (cliente1.getSenha().equals(credenciaisDTO.getSenha())){
-//                    return cliente1;
-//                }
-//            }
-//        }
-//        return null;
-//    }
 
     public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),
@@ -99,7 +86,7 @@ public class ClienteService {
 
 
     public Cliente fromDTO(ClienteDTO clienteDTO) {
-        return new Cliente(clienteDTO.getId(), null,null, clienteDTO.getNome(), clienteDTO.getEmail(), bCryptPasswordEncoder.encode(clienteDTO.getSenha()) );
+        return new Cliente(clienteDTO.getId(), null, null, clienteDTO.getNome(), clienteDTO.getEmail(), bCryptPasswordEncoder.encode(clienteDTO.getSenha()) );
     }
 
     public Cliente fromDTO(ClienteNewDTO clienteNewDTO) {

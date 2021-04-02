@@ -1,10 +1,8 @@
 package com.app.servicebank.dto;
 
 import com.app.servicebank.model.Cliente;
-import com.app.servicebank.model.enums.TipoCliente;
-import com.app.servicebank.service.validation.ClienteUpdate;
+import com.app.servicebank.services.validation.ClienteUpdate;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
 package com.app.servicebank.dto;
 
-import com.app.servicebank.service.validation.ClienteInsert;
+import com.app.servicebank.services.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;

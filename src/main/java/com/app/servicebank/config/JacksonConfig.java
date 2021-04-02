@@ -1,8 +1,7 @@
 package com.app.servicebank.config;
 
-import com.app.servicebank.service.EmailService;
-import com.app.servicebank.service.MockEmailService;
-import com.app.servicebank.service.SmtpEmailService;
+import com.app.servicebank.services.EmailService;
+import com.app.servicebank.services.SmtpEmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

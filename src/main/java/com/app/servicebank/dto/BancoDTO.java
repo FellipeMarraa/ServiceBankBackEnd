@@ -1,7 +1,7 @@
 package com.app.servicebank.dto;
 
 import com.app.servicebank.model.Cliente;
-import com.app.servicebank.service.validation.BancoUpdate;
+import com.app.servicebank.services.validation.BancoUpdate;
 
 import java.io.Serializable;
 

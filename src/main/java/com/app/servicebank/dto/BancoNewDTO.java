@@ -1,6 +1,6 @@
 package com.app.servicebank.dto;
 
-import com.app.servicebank.service.validation.BancoInsert;
+import com.app.servicebank.services.validation.BancoInsert;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;

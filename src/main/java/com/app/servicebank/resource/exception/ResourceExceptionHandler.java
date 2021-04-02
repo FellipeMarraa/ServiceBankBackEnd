@@ -2,6 +2,7 @@ package com.app.servicebank.resource.exception;
 
 import com.app.servicebank.service.exception.DataIntegrityException;
 import com.app.servicebank.service.exception.ObjectNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -42,6 +43,15 @@ public class ResourceExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrity(DataIntegrityViolationException e, HttpServletRequest request) {
+
+        StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Campos duplicados encontrados", System.currentTimeMillis());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 
     }
 

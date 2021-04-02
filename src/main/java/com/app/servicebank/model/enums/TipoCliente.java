@@ -2,13 +2,13 @@ package com.app.servicebank.model.enums;
 
 public enum TipoCliente {
 
-    PESSOAFISICA(1, "Pessoa Física"),
-    PESSOAJURIDICA(2, "Pessoa Jurídica");
+    PESSOAFISICA(10, "Pessoa Física"),
+    PESSOAJURIDICA(20, "Pessoa Jurídica");
 
     private int cod;
     private String descricao;
 
-    TipoCliente(int cod, String descricao) {
+    private TipoCliente(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }

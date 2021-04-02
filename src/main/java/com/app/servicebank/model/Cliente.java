@@ -1,18 +1,14 @@
 package com.app.servicebank.model;
 
-import com.app.servicebank.model.enums.TipoCliente;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 @Table(name="Cliente")
@@ -22,28 +18,38 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @NotEmpty(message="Preenchimento obrigatório")
-//    @Column(unique = true)
-//    @CPF
+    @Column(unique = true)
+    @CPF
     private String cpf;
 
-    //TODO IMPLEMENTAR CNPJ NO FRONT
-////    @CNPJ
-//    private String cnpj;
+    @Column(unique = true)
+    @CNPJ
+    private String cnpj;
 
-//    @Length(min=5, max=120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
 
-//    @NotEmpty(message = "Preenchimento obrigatório")
-//    @Email(message = "Email inválido")
-//    @Column(unique = true)
     private String email;
 
-//    @NotEmpty(message = "Preenchimento obrigatório")
-//    @Length(min=5, max=120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String senha;
 
-//    private Integer tipo;
+
+    public Cliente() {
+    }
+
+    public Cliente(Integer id,
+                   @CPF String cpf,
+                   @CNPJ String cnpj,
+                   String nome,
+                   @Email(message = "Email inválido") String email,
+                   @NotEmpty(message = "Preenchimento obrigatório") String senha
+    ) {
+        this.id = id;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 
     public Integer getId() {
         return id;
@@ -59,6 +65,14 @@ public class Cliente implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getNome() {
@@ -84,14 +98,6 @@ public class Cliente implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-//    public TipoCliente getTipo() {
-//        return TipoCliente.toEnum(tipo);
-//    }
-//
-//    public void setTipo(TipoCliente tipo) {
-//        this.tipo = tipo.getCod();
-//    }
 
     @Override
     public boolean equals(Object o) {

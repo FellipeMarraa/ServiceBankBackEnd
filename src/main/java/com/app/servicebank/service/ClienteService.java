@@ -1,7 +1,10 @@
 package com.app.servicebank.service;
 
+import com.app.servicebank.dto.ClienteDTO;
+import com.app.servicebank.dto.ClienteNewDTO;
 import com.app.servicebank.model.Cliente;
 import com.app.servicebank.repository.ClienteRepository;
+import com.app.servicebank.resource.exception.FieldMessage;
 import com.app.servicebank.service.exception.DataIntegrityException;
 import com.app.servicebank.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,16 +73,6 @@ public class ClienteService {
         return null;
     }
 
-
-    public boolean isValid(Cliente cliente, ConstraintValidatorContext context){
-
-        Cliente aux = repository.findByEmail(cliente.getEmail());
-        if (aux != null){
-            System.out.print("Email já existente!");
-        }
-        return true;
-    }
-
     public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),
                 orderBy);
@@ -91,6 +85,19 @@ public class ClienteService {
 
         newCliente.setNome(cliente.getNome());
         newCliente.setEmail(cliente.getEmail());
+        newCliente.setSenha(cliente.getSenha());
     }
 
+
+    public Cliente fromDTO(ClienteDTO clienteDTO) {
+        return new Cliente(clienteDTO.getId(), null,null, clienteDTO.getNome(), clienteDTO.getEmail(), clienteDTO.getSenha());
+    }
+
+    public Cliente fromDTO(ClienteNewDTO clienteNewDTO) {
+
+         Cliente cliente = new Cliente(null, clienteNewDTO.getCpf(), clienteNewDTO.getCnpj(), clienteNewDTO.getNome(), null, clienteNewDTO.getSenha());
+
+        return cliente;
+
+    }
 }

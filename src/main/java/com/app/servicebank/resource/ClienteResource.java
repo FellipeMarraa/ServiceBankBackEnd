@@ -1,5 +1,7 @@
 package com.app.servicebank.resource;
 
+import com.app.servicebank.dto.ClienteDTO;
+import com.app.servicebank.dto.ClienteNewDTO;
 import com.app.servicebank.model.Cliente;
 import com.app.servicebank.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,14 +33,19 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public Cliente insert(@Valid @RequestBody Cliente cliente) {
-        return service.insert(cliente);
+    public ResponseEntity<Cliente> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) {
+        Cliente cliente = service.fromDTO(clienteNewDTO);
+        cliente = service.insert(cliente);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.PUT)
-    public Cliente update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) {
+    public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
+        Cliente cliente = service.fromDTO(clienteDTO);
         cliente.setId(id);
-        return service.update(cliente);
+        cliente = service.update(cliente);
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)

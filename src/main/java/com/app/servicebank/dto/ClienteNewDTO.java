@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
@@ -22,6 +23,10 @@ public class ClienteNewDTO implements Serializable {
     @Length(min = 5, max = 120, message = ("O nome deve conter no mínimo 5 e no máximo 120 caracteres"))
     @NotEmpty(message = "Preenchimento obrigatório")
     private String nome;
+
+    @Email
+    @NotEmpty(message = "Email obrigatório")
+    private String email;
 
     @Length(min = 6, message = "A senha deve conter no mínimo 6 caracteres")
     @NotEmpty(message = "Preenchimento obrigatório")
@@ -52,6 +57,14 @@ public class ClienteNewDTO implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {

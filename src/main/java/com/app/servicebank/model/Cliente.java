@@ -113,4 +113,13 @@ public class Cliente implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Cliente{");
+        sb.append("nome='").append(nome).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

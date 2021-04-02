@@ -27,6 +27,12 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private EmailService emailService;
+
 
     public Cliente find(Integer id) {
         Optional<Cliente> cliente = repository.findById(id);
@@ -36,7 +42,9 @@ public class ClienteService {
     @Transactional
     public Cliente insert(Cliente cliente) {
         cliente.setId(null);
-        return repository.save(cliente);
+        repository.save(cliente);
+        emailService.sendOrderConfirmationEmail(cliente);
+        return cliente;
     }
 
     public List<Cliente> findAll(){
@@ -61,18 +69,18 @@ public class ClienteService {
         return null;
     }
 
-    public Cliente logar(Cliente cliente) {
-
-        List<Cliente> listaDb = repository.findAll();
-        for (Cliente cliente1 : listaDb) {
-            if (cliente1.getCpf().equals(cliente.getCpf())){
-                if (cliente1.getSenha().equals(cliente.getSenha())){
-                    return cliente1;
-                }
-            }
-        }
-        return null;
-    }
+//    public Cliente logar(CredenciaisDTO credenciaisDTO) {
+//
+//        List<Cliente> listaDb = repository.findAll();
+//        for (Cliente cliente1 : listaDb) {
+//            if (cliente1.getCpf().equals(credenciaisDTO.getCpf())){
+//                if (cliente1.getSenha().equals(credenciaisDTO.getSenha())){
+//                    return cliente1;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),
@@ -96,7 +104,7 @@ public class ClienteService {
 
     public Cliente fromDTO(ClienteNewDTO clienteNewDTO) {
 
-         Cliente cliente = new Cliente(null, clienteNewDTO.getCpf(), clienteNewDTO.getCnpj(), clienteNewDTO.getNome(), null, bCryptPasswordEncoder.encode(clienteNewDTO.getSenha()));
+         Cliente cliente = new Cliente(null, clienteNewDTO.getCpf(), clienteNewDTO.getCnpj(), clienteNewDTO.getNome(), clienteNewDTO.getEmail(), bCryptPasswordEncoder.encode(clienteNewDTO.getSenha()));
 
         return cliente;
 

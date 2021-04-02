@@ -20,6 +20,8 @@ public class ClienteDTO implements Serializable {
     @NotEmpty(message = "Preenchimento obrigatório")
     private String senha;
 
+    private String email;
+
 
     public ClienteDTO() {
     }
@@ -29,6 +31,7 @@ public class ClienteDTO implements Serializable {
         nome = clienteDto.getNome();
         cpf = clienteDto.getEmail();
         senha = clienteDto.getSenha();
+        email = clienteDto.getEmail();
 
     }
 
@@ -64,4 +67,11 @@ public class ClienteDTO implements Serializable {
         this.senha = senha;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 }

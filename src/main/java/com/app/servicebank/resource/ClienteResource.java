@@ -2,6 +2,7 @@ package com.app.servicebank.resource;
 
 import com.app.servicebank.dto.ClienteDTO;
 import com.app.servicebank.dto.ClienteNewDTO;
+import com.app.servicebank.dto.CredenciaisDTO;
 import com.app.servicebank.model.Cliente;
 import com.app.servicebank.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,10 @@ public class ClienteResource {
         return service.delete(id);
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Cliente logar(@RequestBody Cliente cliente) {
-        return service.logar(cliente);
-    }
+//    @RequestMapping(value = "/login",method = RequestMethod.POST)
+//    public Cliente logar(@RequestBody CredenciaisDTO credenciaisDTO) {
+//        return service.logar(credenciaisDTO);
+//    }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public Page<Cliente> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,

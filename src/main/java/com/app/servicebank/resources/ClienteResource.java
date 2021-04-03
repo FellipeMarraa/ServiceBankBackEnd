@@ -33,14 +33,14 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public ResponseEntity<Cliente> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) {
         Cliente cliente = service.fromDTO(clienteNewDTO);
         cliente = service.insert(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "edit/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
         Cliente cliente = service.fromDTO(clienteDTO);
         cliente.setId(id);
@@ -48,7 +48,7 @@ public class ClienteResource {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public Void delete(@PathVariable Integer id){
         return service.delete(id);
     }

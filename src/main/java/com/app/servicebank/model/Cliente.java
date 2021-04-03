@@ -13,35 +13,35 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
-    private String cpf;
-
-    @Column(unique = true)
-    private String cnpj;
-
     private String nome;
 
     private String email;
 
     private String senha;
 
+    @Column(unique = true)
+    private String cpf;
+
+    @Column(unique = true)
+    private String cnpj;
+
 
     public Cliente() {
     }
 
     public Cliente(Integer id,
-                   String cpf,
-                   String cnpj,
                    String nome,
                    String email,
-                   String senha
+                   String senha,
+                   String cpf,
+                   String cnpj
     ) {
         this.id = id;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
     }
 
     public Integer getId() {

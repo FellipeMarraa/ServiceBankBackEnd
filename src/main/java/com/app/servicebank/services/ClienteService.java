@@ -42,7 +42,7 @@ public class ClienteService {
     @Transactional
     public Cliente insert(Cliente cliente) {
         cliente.setId(null);
-        repository.save(cliente);
+        cliente = repository.save(cliente);
         emailService.sendOrderConfirmationHtmlEmail(cliente);
         return cliente;
     }
@@ -86,12 +86,12 @@ public class ClienteService {
 
 
     public Cliente fromDTO(ClienteDTO clienteDTO) {
-        return new Cliente(clienteDTO.getId(), null, null, clienteDTO.getNome(), clienteDTO.getEmail(), bCryptPasswordEncoder.encode(clienteDTO.getSenha()) );
+        return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), bCryptPasswordEncoder.encode(clienteDTO.getSenha()), null, null );
     }
 
     public Cliente fromDTO(ClienteNewDTO clienteNewDTO) {
 
-         Cliente cliente = new Cliente(null, clienteNewDTO.getCpf(), clienteNewDTO.getCnpj(), clienteNewDTO.getNome(), clienteNewDTO.getEmail(), bCryptPasswordEncoder.encode(clienteNewDTO.getSenha()));
+         Cliente cliente = new Cliente(null, clienteNewDTO.getNome(), clienteNewDTO.getEmail(), bCryptPasswordEncoder.encode(clienteNewDTO.getSenha()), clienteNewDTO.getCpf(), clienteNewDTO.getCnpj());
 
         return cliente;
 
